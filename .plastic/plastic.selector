@@ -1,0 +1,4 @@
+repository "Main Menu@rmzqkpw@cloud"
+  path "/"
+    br "/main"
+    co "/main"
