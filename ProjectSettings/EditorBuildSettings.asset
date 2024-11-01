@@ -29,6 +29,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SelectDifficulty.unity
     guid: 692b49c39d83a91498718be47c201985
+  - enabled: 1
+    path: Assets/Scenes/LoadingScenes/LoadStart.unity
+    guid: a752cc97167544f489f10ed9bc217055
+  - enabled: 1
+    path: Assets/Scenes/LoadingScenes/Load2Diag.unity
+    guid: cd66a98f415f4ea4fac69395910aa258
+  - enabled: 1
+    path: Assets/Scenes/LoadingScenes/LoadReturnDiff.unity
+    guid: 135f3ecb6817499458941af21e476775
+  - enabled: 1
+    path: Assets/Scenes/LoadingScenes/LoadReturnMain.unity
+    guid: 2d210f6a48c046a448dff7f42a628f37
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: c4094d1c0d5be544cafac2e5b94408a2, type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 90ba7f9da3187a341872788d82e27e3d, type: 2}

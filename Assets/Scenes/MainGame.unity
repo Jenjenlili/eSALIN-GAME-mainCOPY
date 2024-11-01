@@ -806,6 +806,7 @@ GameObject:
   - component: {fileID: 1099305055}
   - component: {fileID: 1099305057}
   - component: {fileID: 1099305056}
+  - component: {fileID: 1099305058}
   m_Layer: 5
   m_Name: Pause Panel
   m_TagString: Untagged
@@ -873,6 +874,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099305054}
   m_CullTransparentMesh: 1
+--- !u!114 &1099305058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099305054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d25cbb19f19c947a25c56e540bb8dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 2009798134}
 --- !u!224 &1176019637 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2219576065376329710, guid: 213b61bc2e4a16b4d8a1ffb7a49919de, type: 3}

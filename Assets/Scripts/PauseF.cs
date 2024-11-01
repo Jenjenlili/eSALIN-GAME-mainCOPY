@@ -12,7 +12,7 @@ public class PauseF : MonoBehaviour
         Time.timeScale = 0;
     }
     public void Main() {
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("LoadReturnMain");
         Time.timeScale = 1;
     }
 
@@ -21,7 +21,7 @@ public class PauseF : MonoBehaviour
         Time.timeScale = 1;
     }
     public void chooseDiff () {
-        SceneManager.LoadScene("SelectDifficulty");
+        SceneManager.LoadScene("LoadReturnDiff");
         Time.timeScale = 1;
     }
 }
