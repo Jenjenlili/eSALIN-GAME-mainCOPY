@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
 
       GetComponent<SpriteRenderer>().sprite = type.sprite;
    }
+   
    private void Update() {
     //part 3 or 4
       RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.left, range, mcMask);
