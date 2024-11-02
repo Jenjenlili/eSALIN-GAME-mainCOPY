@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a289b488e26471d44acc0bfbb2d0ff0f
+guid: 561c115a4922cec4fa8eda5b367a6cb8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,85 +110,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: slasjhh_0
+      name: slashy_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 788
+        width: 787
         height: 640
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1ebdef9bda50e44dbc44bf2a9c71378
-      internalID: -566683548
+      spriteID: a902a1dded8563144b513caece9e1349
+      internalID: 691058404
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slasjhh_1
+      name: slashy_1
       rect:
         serializedVersion: 2
-        x: 788
+        x: 787
         y: 0
-        width: 812
+        width: 810
         height: 640
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73c2ad32208a99942ba80c9afa808d7e
-      internalID: -281643532
+      spriteID: 5e2ae0216694100498a03511d28156b8
+      internalID: -1148476857
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slasjhh_2
+      name: slashy_2
       rect:
         serializedVersion: 2
-        x: 1600
+        x: 1597
         y: 0
-        width: 800
+        width: 676
         height: 640
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2052675ecef9a84f906d2367a10c968
-      internalID: -952361508
+      spriteID: 36d7b634390980a4c9eaa979807e5d4f
+      internalID: 2014237104
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slasjhh_3
+      name: slashy_3
       rect:
         serializedVersion: 2
-        x: 2400
+        x: 2273
         y: 0
-        width: 800
+        width: 670
         height: 640
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f306a2a6759d7c45a9deaf8f2c39b1d
-      internalID: 1744046906
+      spriteID: 3d87eb6bafe5d574e9e9080c204898ec
+      internalID: -1993246583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slashy_4
+      rect:
+        serializedVersion: 2
+        x: 2943
+        y: 0
+        width: 558
+        height: 640
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdcd5f5823394e445a4cf2b6b47f68e8
+      internalID: 808949004
       vertices: []
       indices: 
       edges: []
@@ -204,10 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      slasjhh_0: -566683548
-      slasjhh_1: -281643532
-      slasjhh_2: -952361508
-      slasjhh_3: 1744046906
+      slashy_0: 691058404
+      slashy_1: -1148476857
+      slashy_2: 2014237104
+      slashy_3: -1993246583
+      slashy_4: 808949004
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

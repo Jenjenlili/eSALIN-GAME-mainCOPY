@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class Enemy : MonoBehaviour
    public int health;
    public int damage;
    public float range;
+
+   public TextMeshProUGUI Text;
 
    public EnemyTypes type;
    public LayerMask mcMask; //changes needed
@@ -21,6 +24,7 @@ public class Enemy : MonoBehaviour
       speed = type.speed;
       damage = type.damage;
       range = type.range;
+      Text.text = "Text";
 
       GetComponent<SpriteRenderer>().sprite = type.sprite;
    }
