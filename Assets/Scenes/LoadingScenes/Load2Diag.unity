@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a724de1a1314f94db11f401c7f350e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  units: 1000
+  units: 150
   Prefab: {fileID: 1804535667647702967, guid: 2c545085fd7c59447901752d0cf4696d, type: 3}
   fill: {fileID: 2052876887}
   nextSceneName: DialogueScene

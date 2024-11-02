@@ -11,7 +11,11 @@ public class EnemySpawner : MonoBehaviour
     public Vector3[] customScales;         // Array of custom scales for each enemy prefab
     public float[] spawnIntervals;         // Array of custom spawn intervals for each enemy prefab
 
+    [SerializeField]
+    private int numberOfSpawns = 10;       // Number of enemies to spawn
+
     private bool isSpawning = true;        // Control spawning state
+    private int spawnCount = 0;            // Tracks the number of enemies spawned
 
     private void Start() {
         // Ensure the array sizes match
@@ -25,13 +29,14 @@ public class EnemySpawner : MonoBehaviour
     }
 
     IEnumerator SpawnEnemiesWithIntervals() {
-        while (isSpawning) {
+        while (isSpawning && spawnCount < numberOfSpawns) {
             // Choose a random enemy prefab and corresponding spawn interval
             int randomEnemyIndex = Random.Range(0, enemyPrefabs.Length);
             float spawnInterval = spawnIntervals[randomEnemyIndex];
 
             // Spawn the enemy
             SpawnEnemy(randomEnemyIndex);
+            spawnCount++; // Increase the spawn count
 
             // Wait for the next spawn based on the prefab's spawn interval
             yield return new WaitForSeconds(spawnInterval);
@@ -53,26 +58,20 @@ public class EnemySpawner : MonoBehaviour
         SpriteRenderer renderer = enemy.GetComponent<SpriteRenderer>();
         if (renderer != null && enemySprites.Length > 0) {
             int randomSpriteIndex = Random.Range(0, enemySprites.Length);
-            renderer.sprite = enemySprites[randomSpriteIndex];  // Assign a random sprite
+            renderer.sprite = enemySprites[randomSpriteIndex];
         }
 
         // Check for TextMeshPro component and activate it if found
         TextMeshPro textMeshPro = enemy.GetComponentInChildren<TextMeshPro>();
         if (textMeshPro != null) {
-            textMeshPro.gameObject.SetActive(true);  // Ensure it's active
-            textMeshPro.text = "Enemy Spawned!";     // Example text to show on spawn
-            textMeshPro.sortingOrder = 1;            // Adjust sorting order to ensure visibility
-
-            // Debugging information
-            Debug.Log("TextMeshPro component found and activated for spawned enemy.");
-            Debug.Log($"TextMeshPro Position: {textMeshPro.transform.position}");
-            Debug.Log($"TextMeshPro Local Scale: {textMeshPro.transform.localScale}");
-            Debug.Log($"TextMeshPro Font Size: {textMeshPro.fontSize}");
+            textMeshPro.gameObject.SetActive(true);
+            textMeshPro.text = "Enemy Spawned!";
+            textMeshPro.sortingOrder = 1;
 
             // Set position and scale to ensure visibility (optional)
-            textMeshPro.transform.position = spawnPoint.position + new Vector3(0, 0.5f, 0); // Adjust as needed
-            textMeshPro.transform.localScale = Vector3.one;   // Reset scale for testing visibility
-            textMeshPro.fontSize = 5; // Set a larger font size to make it more visible
+            textMeshPro.transform.position = spawnPoint.position + new Vector3(0, 0.5f, 0);
+            textMeshPro.transform.localScale = Vector3.one;
+            textMeshPro.fontSize = 5;
         } else {
             Debug.LogWarning("TextMeshPro component not found in spawned enemy.");
         }
