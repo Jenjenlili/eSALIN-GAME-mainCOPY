@@ -227,7 +227,7 @@ MonoBehaviour:
   health: 1
   damage: 1
   range: 0.5
-  Text: {fileID: 0}
+  TagalogText: {fileID: 4182103660922124327}
   type: {fileID: 0}
   mcMask:
     serializedVersion: 2
