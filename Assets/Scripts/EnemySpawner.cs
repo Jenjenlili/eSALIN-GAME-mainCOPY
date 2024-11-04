@@ -50,8 +50,13 @@ public class EnemySpawner : MonoBehaviour
         // Set Tagalog text from the database
         Enemy enemyComponent = enemy.GetComponent<Enemy>();
         if (enemyComponent != null) {
-            string tagalogWord = FindObjectOfType<GameManager>().GetRandomTagalogWord(); // Get a random Tagalog word
-            enemyComponent.SetTagalogText(tagalogWord); // Set the word on the enemy
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            if (gameManager != null) {
+                var (tagalogWord, englishWord, definition) = gameManager.GetRandomWordByLevel(); // Get a random Tagalog word
+                enemyComponent.SetTagalogText(tagalogWord); // Set the word on the enemy
+            } else {
+                Debug.LogError("GameManager not found.");
+            }
         } else {
             Debug.LogWarning("Enemy component not found on spawned enemy.");
         }

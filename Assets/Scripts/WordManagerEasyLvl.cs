@@ -7,89 +7,113 @@ using Mono.Data.Sqlite;
 
 public class GameManager : MonoBehaviour
 {
-    public TextMeshProUGUI TagalogText;
+    private string dbPath;
+
+    private struct WordData
+    {
+        public string Tagalog;
+        public string English;
+        public string Definition;
+    }
+
+    private List<WordData> enemyWordList = new List<WordData>();
     public TextMeshProUGUI DefinitionText;
     public TextMeshProUGUI Choice1Text;
     public TextMeshProUGUI Choice2Text;
     public TextMeshProUGUI Choice3Text;
 
-    private string dbPath;
-
     private void Start()
     {
         dbPath = "URI=file:" + Application.dataPath + "/Plugins/eSALINdatabase.db";
         
-        // Load the easy level word on start
-        (string correctEnglish, string definition) = GetEasyWord();
-        
-        if (correctEnglish != null && definition != null) {
+        // Load all unique words for enemies at the start
+        LoadUniqueEnemyWords("easyWrds_tbl");
+
+        // Example of setting up the first enemy (call this function when you spawn the enemy)
+        SetupEnemy();
+    }
+
+    private void LoadUniqueEnemyWords(string tableName)
+    {
+        using (var connection = new SqliteConnection(dbPath))
+        {
+            connection.Open();
+            string query = $"SELECT tagalog, english, definition FROM {tableName}";
+
+            using (var command = new SqliteCommand(query, connection))
+            {
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        WordData wordData = new WordData
+                        {
+                            Tagalog = reader.GetString(0),
+                            English = reader.GetString(1),
+                            Definition = reader.GetString(2)
+                        };
+
+                        // Ensure each word combination is unique
+                        if (!enemyWordList.Exists(w => w.Tagalog == wordData.Tagalog && w.English == wordData.English))
+                        {
+                            enemyWordList.Add(wordData);
+                        }
+                    }
+                }
+            }
+            connection.Close();
+        }
+    }
+
+    public (string tagalog, string english, string definition) GetRandomWordByLevel()
+    {
+        if (enemyWordList.Count == 0)
+        {
+            Debug.LogWarning("No more unique words available; consider loading more.");
+            return (null, null, null);
+        }
+
+        // Select a random word from the list and remove it to ensure uniqueness
+        int randomIndex = Random.Range(0, enemyWordList.Count);
+        WordData selectedWord = enemyWordList[randomIndex];
+        enemyWordList.RemoveAt(randomIndex); // Remove to ensure uniqueness for each enemy
+
+        return (selectedWord.Tagalog, selectedWord.English, selectedWord.Definition);
+    }
+
+    // Setup method for an enemy
+    public void SetupEnemy()
+    {
+        var (tagalog, english, definition) = GetRandomWordByLevel();
+
+        // Ensure we have valid data before proceeding
+        if (!string.IsNullOrEmpty(definition))
+        {
             DefinitionText.text = definition;
-
-            List<string> choices = new List<string> { correctEnglish };
-            choices.Add(GetRandomEnglishWord("easyWrds_tbl"));
-            choices.Add(GetRandomEnglishWord("easyWrds_tbl"));
-
-            choices = ShuffleList(choices);
-            Choice1Text.text = choices[0];
-            Choice2Text.text = choices[1];
-            Choice3Text.text = choices[2];
-        } else {
-            Debug.Log("No words available for easy level.");
         }
-    }
-
-    private (string english, string definition) GetEasyWord()
-    {
-        return GetRandomWordByLevel("easyWrds_tbl");
-    }
-
-    private (string english, string definition) GetRandomWordByLevel(string tableName)
-    {
-        string english = null;
-        string definition = null;
-
-        using (var connection = new SqliteConnection(dbPath))
+        else
         {
-            connection.Open();
-            string query = $"SELECT english, definition FROM {tableName} ORDER BY RANDOM() LIMIT 1";
-            using (var command = new SqliteCommand(query, connection))
-            {
-                using (IDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        english = reader.GetString(0);
-                        definition = reader.GetString(1);
-                    }
-                }
-            }
-            connection.Close();
+            Debug.LogWarning("Definition is empty!");
         }
-        return (english, definition);
-    }
 
-    // Method to get a Tagalog word only, for assigning to enemies
-    public string GetRandomTagalogWord()
-    {
-        string tagalog = null;
+        // Prepare choices
+        List<string> choices = new List<string> { english }; // Start with the correct answer
+        choices.Add(GetRandomEnglishWord("easyWrds_tbl")); // Add a random distractor
+        choices.Add(GetRandomEnglishWord("easyWrds_tbl")); // Add another random distractor
+        
+        // Log choices before shuffling
+        Debug.Log("Choices before shuffling: " + string.Join(", ", choices));
 
-        using (var connection = new SqliteConnection(dbPath))
-        {
-            connection.Open();
-            string query = "SELECT tagalog FROM easyWrds_tbl ORDER BY RANDOM() LIMIT 1";
-            using (var command = new SqliteCommand(query, connection))
-            {
-                using (IDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        tagalog = reader.GetString(0);
-                    }
-                }
-            }
-            connection.Close();
-        }
-        return tagalog;
+        // Shuffle choices to randomize their order
+        choices = ShuffleList(choices);
+
+        // Log choices after shuffling
+        Debug.Log("Choices after shuffling: " + string.Join(", ", choices));
+
+        // Set the choice texts
+        Choice1Text.text = choices[0];
+        Choice2Text.text = choices[1];
+        Choice3Text.text = choices[2];
     }
 
     private string GetRandomEnglishWord(string tableName)
