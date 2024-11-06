@@ -15,6 +15,7 @@ public class EnemySpawner : MonoBehaviour
 
     private bool isSpawning = true;
     private int spawnCount = 0;
+    public GameManager gameManager;
 
     private void Start() {
         if (enemyPrefabs.Length != customScales.Length || enemyPrefabs.Length != spawnIntervals.Length) {
@@ -39,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
         Transform spawnPoint = spawnpoints[randomSpawnIndex];
         GameObject selectedEnemyPrefab = enemyPrefabs[randomEnemyIndex];
         GameObject enemy = Instantiate(selectedEnemyPrefab, spawnPoint.position, Quaternion.identity);
+        enemy.gameObject.tag = "Enemy";
 
         // Set sprite for the enemy
         SpriteRenderer renderer = enemy.GetComponent<SpriteRenderer>();
@@ -47,19 +49,33 @@ public class EnemySpawner : MonoBehaviour
             renderer.sprite = enemySprites[randomSpriteIndex];
         }
 
-        // Set Tagalog text from the database
+        //  // Get the Enemy component to set the Tagalog word
+        // Enemy enemyComponent = enemy.GetComponent<Enemy>();
+        // if (enemyComponent != null && gameManager != null) {
+        //     // Set the Tagalog word and choices for this enemy
+        //     gameManager.SetupEnemyTagalogText(enemyComponent);
+        // }
+        // else {
+        //     Debug.LogWarning("Enemy component or GameManager not found.");
+        // }
+
+        // Get the Enemy component to set the Tagalog word
         Enemy enemyComponent = enemy.GetComponent<Enemy>();
-        if (enemyComponent != null) {
-            GameManager gameManager = FindObjectOfType<GameManager>();
-            if (gameManager != null) {
-                var (tagalogWord, englishWord, definition) = gameManager.GetRandomWordByLevel(); // Get a random Tagalog word
-                enemyComponent.SetTagalogText(tagalogWord); // Set the word on the enemy
-            } else {
-                Debug.LogError("GameManager not found.");
-            }
-        } else {
-            Debug.LogWarning("Enemy component not found on spawned enemy.");
+        if (enemyComponent != null && gameManager != null) {
+            // Set the Tagalog word for this enemy
+            gameManager.SetupEnemy(enemyComponent);
         }
+        else {
+            Debug.Log("Enemy component or GameManager not found.");
+        }
+
+        // PROBLEM: TAGALOG WORD IS SAME EACH ENEMY
+        //Get the Enemy component (no need to set the Tagalog word here)
+        // Enemy enemyComponent = enemy.GetComponent<Enemy>();
+        // if (enemyComponent != null) {
+        //     enemyComponent.SetTagalogText(gameManager.GetCurrentTagalogWord()); // Set the current Tagalog word
+        // }
+
 
         ScaleEnemy(enemy, randomEnemyIndex);
     }
