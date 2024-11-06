@@ -564,3 +564,5 @@ public class GameManager : MonoBehaviour
         return list;
     }
 }
+
+//DI KO NA KAYA
