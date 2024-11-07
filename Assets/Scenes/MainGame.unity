@@ -155,7 +155,6 @@ MonoBehaviour:
   Choice1Text: {fileID: 1805589728}
   Choice2Text: {fileID: 1779216220}
   Choice3Text: {fileID: 1695557557}
-  currentEnemy: 0
 --- !u!4 &44530609
 Transform:
   m_ObjectHideFlags: 0
@@ -325,7 +324,6 @@ MonoBehaviour:
   Choice1Text: {fileID: 0}
   Choice2Text: {fileID: 0}
   Choice3Text: {fileID: 0}
-  currentEnemy: 0
 --- !u!224 &409664395 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2839894811229476582, guid: 19d0e027e37c58144b5356d65edfa7c5, type: 3}
@@ -444,7 +442,6 @@ MonoBehaviour:
   Choice1Text: {fileID: 0}
   Choice2Text: {fileID: 0}
   Choice3Text: {fileID: 0}
-  currentEnemy: 0
 --- !u!1 &680090385
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,14 +510,14 @@ MonoBehaviour:
   - {x: 4, y: 4, z: 4}
   - {x: 4, y: 4, z: 4}
   spawnIntervals:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  numberOfSpawns: 5
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  numberOfSpawns: 10
   gameManager: {fileID: 44530608}
 --- !u!1 &830601027
 GameObject:
@@ -1309,7 +1306,6 @@ MonoBehaviour:
   Choice1Text: {fileID: 0}
   Choice2Text: {fileID: 0}
   Choice3Text: {fileID: 0}
-  currentEnemy: 0
 --- !u!1 &1684381905
 GameObject:
   m_ObjectHideFlags: 0
