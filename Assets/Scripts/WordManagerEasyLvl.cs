@@ -723,10 +723,15 @@ public class GameManager : MonoBehaviour
         if (enemies.Count > 0)
             // Log what is in the first index of the enemies list
             Debug.Log($"First enemy ID in list: {enemies[0]}");
+            Debug.Log("Selected choice (on-click): " + selectedChoice);
+            string currentTagalog = enemyWordList[0].Tagalog;  // Store the current Tagalog word
+            string definition = enemyWordList[0].Definition;
         {
             if (selectedChoice == correctAnswer)
             {
                 Debug.Log("Correct answer selected.");
+                InsertCorrectAnswer(enemies[0], currentTagalog, definition, correctAnswer);  // Insert the correct answer into rtWrdRecords_tbl
+                ProceedToNextWord();
                 ProceedToNextWord();
                 DestroyCurrentEnemy();
             }
@@ -737,6 +742,33 @@ public class GameManager : MonoBehaviour
                 DestroyCurrentEnemy();
             }
         }
+    }
+    // Method to insert the correct answer into rtWrdRecords_tbl
+    private void InsertCorrectAnswer(int wordID, string tagalog, string definition, string correctAnswer)
+    {
+        using (var connection = new SqliteConnection(dbPath))
+        {
+            connection.Open();
+
+            // Insert the correct answer into rtWrdRecords_tbl
+            string insertQuery = @"
+                INSERT INTO rtWrdRecords_tbl (word_ID, tagalog, english, definition)
+                VALUES (@wordID, @tagalog, @english, @definition)";
+
+            using (var command = new SqliteCommand(insertQuery, connection))
+            {
+                command.Parameters.AddWithValue("@wordID", wordID);
+                command.Parameters.AddWithValue("@tagalog", tagalog);
+                command.Parameters.AddWithValue("@english", correctAnswer);
+                command.Parameters.AddWithValue("@definition", definition);
+
+                command.ExecuteNonQuery();
+            }
+
+            connection.Close();
+        }
+
+        Debug.Log($"Inserted correct answer for wordID {wordID},{tagalog}, {correctAnswer}, {definition} into rtWrdRecords_tbl.");
     }
 
     private void DestroyCurrentEnemy()
